@@ -1,0 +1,5 @@
+@media print {
+	#settings1Column, #settings2Column, #groupNameList, [contenteditable=true]:empty {
+		display: none !important;
+	}	
+}

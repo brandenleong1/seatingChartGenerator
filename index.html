@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Seating Chart Generator</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<link id="printCSS" href="" rel="stylesheet" type="text/css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+</head>
+
+<body spellcheck="false">
+	<div class="vertColumn" id="settings1Column">
+		<h1>Settings</h1>
+		<div>
+			<span>Download: <a href="Seating Chart Sample.xlsx" download>Sample</a>&nbsp;&nbsp;<a href="Seating Chart Template.xlsx" download>Template</a></span>
+		</div>
+		<div>
+			<span>Upload Spreadsheet:</span>
+			<input type="file" accept=".xlsx" id="fileUpload">
+		</div>
+		<div>
+			<span>Rows: <span class="yellowText" style="font-weight: bold;">6</span></span>
+			<input type="range" min="2" max="10" value="6" class="slider" id="sliderNumRows">
+		</div>
+		<div>
+			<span>Columns: <span class="yellowText" style="font-weight: bold;">6</span></span>
+			<input type="range" min="2" max="10" value="6" class="slider" id="sliderNumColumns">
+		</div>
+		<div class="greenButton" style="margin-top: 20px;" onclick="generateGrid();">Generate!</div>
+	</div>
+	<div class="vertColumn" id="settings2Column" style="display: none;">
+		<h1 style="margin-bottom: 5px;"><span id="createGroupLabel">Create </span>Groups</h1>
+		<h4 style="margin-top: 0;">(Front of classroom is at the <span class="yellowText" id="topBottomLabel">bottom</span>)</h4>
+		<div id="colorList"></div>
+		<div style="display: flex; column-gap: 10px; margin-top: 20px;">
+			<div class="greenButton" id="newGroup" onclick="newGroup();">New Group</div>
+			<div class="redButton" id="deleteGroup" style="display: none;" onclick="deleteGroup();">Delete Group</div>
+		</div>
+		<div style="display: flex; column-gap: 10px; margin-top: 20px;">
+			<div class="greenButton" id="generateSeating" style="display: none;" onclick="generateSeating();">Generate!</div>
+			<div class="greenButton" id="flipBoard" style="display: none;" onclick="flipBoard();">Flip 180°</div>
+			<div class="greenButton" id="changeLayout" style="display: none;" onclick="changeLayout();">Classic View</div>
+		</div>
+		<div style="display: flex; column-gap: 10px; margin-top: 20px;">
+			<div class="greenButton" id="swapSeats" style="display: none;" onclick="swapSeats();">Swap Seats</div>
+			<div class="greenButton" id="swapStudents" style="display: none;" onclick="swapStudents();">Swap Students</div>
+		</div>
+		<div style="display: flex; column-gap: 10px; margin-top: 20px;">
+			<div class="greenButton" id="changeColor" style="display: none;" onclick="changeColor();">Full Color</div>
+			<div class="greenButton" id="changePrint" style="display: none;" onclick="changePrint();">Print Everything</div>
+		</div>
+	</div>
+	<div class="vertColumn" id="seatGrid"></div>
+	<div class="vertColumn" id="groupNameList" style="display: none;">
+		<h1 style="margin-bottom: 5px;">Group Names</h1>
+		<h4 style="margin-top: 0;">People in <span class="yellowText" id="groupNamesLabel">Group X</span></h4>
+		<div id="namesList">
+			<div>Select Group...</div>
+		</div>
+		<div style="display: flex; column-gap: 10px; margin-top: 20px;">
+			<div class="greenButton" id="toggleAllNames" onclick="toggleAllNames();">Show All Names</div>
+		</div>
+	</div>
+  <script src="script.js"></script>
+</body>
+
+</html>
