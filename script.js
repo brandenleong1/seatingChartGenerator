@@ -163,10 +163,9 @@ function newGroup() {
 			}
 		}
 	}
-	d.appendChild(s);
-	d.appendChild(c);
+	d.append(s, c);
 	d.groupID = l.length;
-	document.getElementById('colorList').appendChild(d);
+	document.getElementById('colorList').append(d);
 	d.onclick = function() {
 		selectGroup(this);
 	};
@@ -397,7 +396,7 @@ function writeStudentName(seat) {
 	let t = document.getElementById('changeLayout').innerText;
 	if (seat.student) {
 		let name = seat.student.name.split(', ');
-		
+
 		if (t == 'Classic View') {
 			seat.innerHTML = '<span>' + name[1] + ' ' + (seat.student.nickname ? '(' + seat.student.nickname + ') ' : '') + name[0] + '</span>';
 		} else if (t == 'Teacher View') {
@@ -407,7 +406,7 @@ function writeStudentName(seat) {
 		} else {
 			seat.innerHTML = '<span>ERR</span>';
 		}
-		
+
 		seat.classList.add('filled');
 		seat.addEventListener('click', popupInfo);
 		seat.title = order.reduce((a, b) => a + (seat.student[b] ? b + ': ' + seat.student[b] + '\n' : ''), '');
@@ -564,16 +563,16 @@ function generateNameList() {
 	let l = Array.from(document.querySelectorAll('#colorList > div'));
 	let s = document.querySelector('#colorList > div.selected');
 	let i = l.indexOf(s);
-	
+
 	if (s) {
 		document.getElementById('groupNamesLabel').innerText = 'Group ' + (i + 1);
 		let l2 = document.getElementById('namesList');
 		l2.replaceChildren();
-		
+
 		for (let e of document.querySelectorAll('.seat.filled')) {
 			if (e.groupID == i) {
 				let d = document.createElement('div');
-				
+
 				let t = document.getElementById('changeLayout').innerText;
 				if (t == 'Classic View') {
 					d.innerText = e.student.name;
@@ -585,8 +584,8 @@ function generateNameList() {
 				} else {
 					d.innerText = 'ERR';
 				}
-				
-				l2.appendChild(d);
+
+				l2.append(d);
 			}
 		}
 
@@ -600,15 +599,15 @@ function generateNameList() {
 			}
 	        return 0;
 	    }).forEach(function(div) {
-	        div.parentElement.appendChild(div);
+	        div.parentElement.append(div);
 	    });
 	} else {
 		document.getElementById('groupNamesLabel').innerText = 'Group X';
 		document.getElementById('namesList').replaceChildren();
-		
+
 		let d = document.createElement('div');
 		d.innerText = 'Select Group...';
-		document.getElementById('namesList').appendChild(d);
+		document.getElementById('namesList').append(d);
 	}
 }
 
@@ -633,7 +632,7 @@ function generateNameListFull() {
 
 		d.groupID = e.groupID;
 		d.style.color = l[e.groupID].childNodes[1].style.backgroundColor;
-		l2.appendChild(d);
+		l2.append(d);
 	}
 
 	Array.from(document.body.querySelectorAll('#namesList > div'))
@@ -642,7 +641,7 @@ function generateNameListFull() {
 			d.innerText = 'Group ' + (i + 1);
 			d.groupID = i;
 			d.style.color = l[i].childNodes[1].style.backgroundColor;
-			l2.appendChild(d);
+			l2.append(d);
 			d.isLabel = true;
 			d.style.fontWeight = 'bold';
 			return d;
@@ -668,7 +667,7 @@ function generateNameListFull() {
 			return 0;
 		})
 		.forEach(function(div) {
-			div.parentElement.appendChild(div);
+			div.parentElement.append(div);
 		});
 }
 
